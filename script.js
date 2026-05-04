@@ -365,32 +365,23 @@ function renderMenuSummary() {
   if (menuSummaryList) {
     if (orderLines.length === 0) {
       menuSummaryList.innerHTML =
-        '<p class="menu-empty">TodavÃ­a no has agregado productos.</p>';
+        '<p class="menu-empty">Todavía no has agregado productos.</p>';
     } else {
       menuSummaryList.innerHTML = orderLines
-        .map(
-          (line) =>
-            `<div class="menu-summary-row"><span>${line.qty} x ${line.name}</span><strong>$${formatMoney(
-              line.qty * line.priceValue
-            )}</strong></div>`
-        )
+        .map((line) => {
+          const lineTotal = line.priceValue > 0
+            ? `$${formatMoney(line.qty * line.priceValue)}`
+            : line.priceText;
+
+          return `<div class="menu-summary-row"><span>${line.qty} x ${line.name}</span><strong>${lineTotal}</strong></div>`;
+        })
         .join("");
     }
   }
 
   if (whatsappOrderBtn) {
-    const hasSelection = orderLines.length > 0;
-    const hasCustomerInfo =
-      Boolean(customerNameInput?.value.trim()) &&
-      Boolean(customerAddressInput?.value.trim());
-    const hasPaymentMethod = Boolean(
-      paymentMethodSelect ? paymentMethodSelect.value.trim() : ""
-    );
-    const hasCashPreference =
-      !isCashPayment || Boolean(cashPreferenceSelect ? cashPreferenceSelect.value.trim() : "");
-    const canOrder = hasSelection && hasCustomerInfo && hasPaymentMethod && hasCashPreference;
-    whatsappOrderBtn.disabled = !canOrder;
-    whatsappOrderBtn.setAttribute("aria-disabled", String(!canOrder));
+    whatsappOrderBtn.disabled = false;
+    whatsappOrderBtn.setAttribute("aria-disabled", "false");
   }
 
   return { orderLines, totalItems, totalValue };
@@ -651,7 +642,13 @@ function buildWhatsAppOrderMessage() {
   const cashPreference = cashPreferenceSelect ? cashPreferenceSelect.value.trim() : "";
 
   if (!orderLines.length) {
-    return "";
+    return [
+      "Hola QArepotas, quiero hacer un pedido.",
+      "",
+      `Nombre: ${customerName || "No registrado"}`,
+      `Dirección: ${customerAddress || "No registrada"}`,
+      `Pago: ${paymentMethod || "No registrado"}`,
+    ].join("\n");
   }
 
   const lines = orderLines.map(
