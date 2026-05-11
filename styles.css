@@ -63,9 +63,10 @@ button {
   justify-content: space-between;
   gap: 18px;
   padding: 16px 28px;
-  background: #fff7ea;
-  color: #1c0909;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  background: linear-gradient(135deg, rgba(58, 9, 9, 0.98) 0%, rgba(143, 15, 15, 0.98) 100%);
+  color: var(--text);
+  border-bottom: 1px solid rgba(255, 208, 40, 0.22);
+  box-shadow: 0 14px 34px rgba(42, 6, 6, 0.26);
 }
 
 .header-left {
@@ -116,14 +117,15 @@ button {
   background: transparent;
   border: 0;
   cursor: pointer;
-  color: #2b0d0d;
+  color: #fff8ef;
   font-weight: 800;
   font-size: 0.98rem;
   padding: 0;
+  text-shadow: 0 1px 10px rgba(42, 6, 6, 0.22);
 }
 
 .nav-link:hover {
-  color: #c61f1f;
+  color: var(--accent);
 }
 
 .header-actions {
@@ -134,21 +136,21 @@ button {
 
 .menu-toggle {
   display: none;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  background: #fff7ea;
+  border: 1px solid rgba(255, 208, 40, 0.28);
+  background: rgba(255, 248, 239, 0.08);
   border-radius: 14px;
   width: 46px;
   height: 46px;
   cursor: pointer;
   font-size: 1.2rem;
-  color: #7e1212;
+  color: var(--accent);
 }
 
 .mobile-nav {
   display: none;
   padding: 12px 20px 18px;
-  background: #fff7ea;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  background: rgba(58, 9, 9, 0.98);
+  border-bottom: 1px solid rgba(255, 208, 40, 0.18);
   flex-direction: column;
   gap: 10px;
 }
@@ -158,14 +160,14 @@ button {
 }
 
 .mobile-link {
-  color: #2b0d0d;
+  color: #fff8ef;
   font-weight: 800;
   padding: 12px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(255, 248, 239, 0.1);
 }
 
 .mobile-link-cta {
-  color: #c61f1f;
+  color: var(--accent);
 }
 
 .hero {
